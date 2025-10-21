@@ -1,0 +1,5 @@
+# ninja log v5
+0	42	1607274814	CMakeFiles/linklist_add_element.dir/linklist_add_element.c.o	bb7fcfec2579653a
+42	69	1607274814	linklist_add_element	b0a7fe94706c87a7
+0	60	1607274999	CMakeFiles/linklist_add_element.dir/linklist_add_element.c.o	bb7fcfec2579653a
+60	106	1607274999	linklist_add_element	b0a7fe94706c87a7

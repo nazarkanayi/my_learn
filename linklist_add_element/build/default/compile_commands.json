@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/nazar/eclipse-workspace/linklist_add_element/build/default",
+  "command": "/usr/bin/cc -O3 -DNDEBUG -o CMakeFiles/linklist_add_element.dir/linklist_add_element.c.o -c /home/nazar/eclipse-workspace/linklist_add_element/linklist_add_element.c",
+  "file": "/home/nazar/eclipse-workspace/linklist_add_element/linklist_add_element.c"
+}
+]

@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/nazar/eclipse-workspace/cmake_sample/build/default",
+  "command": "/usr/bin/c++    -O3 -DNDEBUG   -o CMakeFiles/cmake_sample.dir/cmake_sample.cpp.o -c /home/nazar/eclipse-workspace/cmake_sample/cmake_sample.cpp",
+  "file": "/home/nazar/eclipse-workspace/cmake_sample/cmake_sample.cpp"
+}
+]

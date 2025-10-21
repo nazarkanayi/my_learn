@@ -1,0 +1,6 @@
+# ninja log v5
+0	229	0	CMakeFiles/cmake_sample.dir/cmake_sample.cpp.o	98e45c305fba24f2
+229	321	0	cmake_sample	c7a104b7f7eb6c41
+1	6058	1555434041	build.ninja	73960845627c1228
+0	1198	1555434042	CMakeFiles/cmake_sample.dir/cmake_sample.cpp.o	bd16ed0d5e451d96
+1198	1298	1555434042	cmake_sample	de707605e08bed78

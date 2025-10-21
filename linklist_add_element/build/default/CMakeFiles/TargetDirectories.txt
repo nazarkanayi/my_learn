@@ -1,0 +1,3 @@
+/home/nazar/eclipse-workspace/linklist_add_element/build/default/CMakeFiles/rebuild_cache.dir
+/home/nazar/eclipse-workspace/linklist_add_element/build/default/CMakeFiles/linklist_add_element.dir
+/home/nazar/eclipse-workspace/linklist_add_element/build/default/CMakeFiles/edit_cache.dir
