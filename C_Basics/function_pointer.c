@@ -15,7 +15,7 @@ int main() {
     
     int (*func_ptr) (int,int);
 
-    int (*operations[4])(int, int);
+    int (*operations[4])(int, int) ={add,add,add,add};
 
     callback cb;
 
@@ -25,7 +25,7 @@ int main() {
 
     
 
-    printf("ADD %d %d\n",cb(1,1),func_ptr(1,1));
+    printf("ADD %d %d %d\n",cb(1,1),func_ptr(1,1),operations[1](2,2));
 
     ////printf("BSS start address: %p ,%p\n", (void *)&__bss_start, __builtin_frame_address (0));
 
