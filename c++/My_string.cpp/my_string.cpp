@@ -48,16 +48,37 @@ public:
     MyString &operator=(const MyString &other)
     {
         std::cout << "MyString copy operator= called" << std::endl;
-        char *tmp_ptr = Allocator().allocate(other.len + 1);
-        strcpy(tmp_ptr, other.ptr);
+
+        if (this != &other)
+        {
+            char *tmp_ptr = Allocator().allocate(other.len + 1);
+            strcpy(tmp_ptr, other.ptr);
+
+            if (ptr != nullptr)
+            {
+                std::cout << "value before deallocate " << (*ptr == '\0' ? "null string" : ptr) << " " << len << std::endl;
+                Allocator().deallocate(ptr, len + 1); // Deallocate old memory
+            }
+            ptr = tmp_ptr;   // Assign new memory
+            len = other.len; // Update length
+        }
+        return *this;
+    }
+
+    MyString &operator+(const MyString &other)
+    {
+        std::cout << "MyString operator+ called" << std::endl;
+        char *tmp_ptr = Allocator().allocate(other.len + len + 1);
+        strcpy(tmp_ptr, ptr);
+        strcat(tmp_ptr, other.ptr);
 
         if (ptr != nullptr)
         {
             std::cout << "value before deallocate " << (*ptr == '\0' ? "null string" : ptr) << " " << len << std::endl;
             Allocator().deallocate(ptr, len + 1); // Deallocate old memory
         }
-        ptr = tmp_ptr;   // Assign new memory
-        len = other.len; // Update length
+        ptr = tmp_ptr;         // Assign new memory
+        len = other.len + len; // Update length
 
         return *this;
     }
@@ -65,37 +86,39 @@ public:
     MyString &operator=(MyString &&other)
     {
         std::cout << "MyString move operator= called" << std::endl;
-        
-        if (ptr != nullptr)
+
+        if (this != &other)
         {
-            std::cout << "value before deallocate " << (*ptr == '\0' ? "null string" : ptr) << " " << len << std::endl;
-            Allocator().deallocate(ptr, len + 1); // Deallocate old memory
+            if (ptr != nullptr)
+            {
+                std::cout << "value before deallocate " << (*ptr == '\0' ? "null string" : ptr) << " " << len << std::endl;
+                Allocator().deallocate(ptr, len + 1); // Deallocate old memory
+            }
+
+            ptr = other.ptr; // Assign new memory
+            len = other.len; // Update length
+
+            other.ptr = nullptr;
+            other.len = 0;
         }
-
-        ptr = other.ptr;   // Assign new memory
-        len = other.len; // Update length
-
-        other.ptr = nullptr;
-        other.len =0;
-
         return *this;
     }
 
-    int find( const char* s, int pos = 0 ) const
+    int find(const char *s, int pos = 0) const
     {
         if (pos < 0 || pos >= len)
             return -1;
 
-        const char* result = strstr(ptr + pos, s);
+        const char *result = strstr(ptr + pos, s);
         return result ? result - ptr : -1;
     }
 
-    int rfind( const char* s, int pos = -1 ) const
+    int rfind(const char *s, int pos = -1) const
     {
         if (pos < 0 || pos >= len)
             pos = len - 1;
 
-        const char* result = nullptr;
+        const char *result = nullptr;
         for (int i = pos; i >= 0; --i)
         {
             if (strncmp(ptr + i, s, strlen(s)) == 0)
@@ -129,33 +152,39 @@ private:
 template <typename Allocator = std::allocator<char>>
 std::ostream &operator<<(std::ostream &os, const MyString<Allocator> &p)
 {
-    if(p.ptr != nullptr)
-    os << p.ptr; // Output the string
-    return os;   // Return the output stream
+    if (p.ptr != nullptr)
+        os << p.ptr; // Output the string
+    return os;       // Return the output stream
 }
 
 using my_string = MyString<>;
 
 int main()
 {
-    std::cout << "Hello, World!" << std::endl;
+    // std::cout << "Hello, World!" << std::endl;
 
-    MyString<> myStr("Hello, MyString with Allocator!");
-    std::cout << myStr << std::endl; // Output the string using the overloaded
+    // MyString<> myStr("Hello, MyString with Allocator!");
+    // std::cout << myStr << std::endl; // Output the string using the overloaded
 
-    my_string str = myStr;
+    // my_string str = myStr;
 
-    std::cout << str << std::endl;
+    // std::cout << str << std::endl;
 
-    my_string new_str;
+    // my_string new_str;
 
-    new_str = myStr;
+    // new_str = myStr;
 
-    std::cout << new_str << std::endl;
+    // std::cout << new_str << std::endl;
 
-    new_str = std::move(str);
+    // new_str = std::move(str);
 
-    std::cout << new_str << std::endl;
+    // std::cout << new_str << std::endl;
+
+    my_string str1{"one"};
+
+    str1 = std::move(str1 + "two");
+
+    std::cout << str1 << std::endl;
 
     return 0;
 }
